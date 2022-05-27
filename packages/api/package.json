@@ -1,0 +1,15 @@
+{
+  "name": "@skeleton/api",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "@skeleton/tsconfig": "*",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "@skeleton/lib": "*",
+    "@skeleton/prisma": "*",
+    "superjson": "^1.9.1",
+    "zod": "^3.17.3"
+  }
+}
