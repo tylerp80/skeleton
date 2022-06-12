@@ -69,12 +69,12 @@ export const Gratitude = ({
 
   return (
     <>
-      <div className="flex flex-row space-x-3 py-3 rounded-md">
+      <div className="flex flex-row py-3 space-x-3 rounded-md">
         <div className="flex flex-col w-full">
-          <p className="text-sm pb-1 text-gray-500">
+          <p className="pb-1 text-sm text-gray-500">
             {new Date(createdAt).toDateString()}
           </p>
-          <p className="text-gray-500 pb-2 font-medium text-lg">
+          <p className="pb-2 text-lg font-medium text-gray-500">
             I am grateful for:
           </p>
           {isEditing ? (
@@ -136,7 +136,7 @@ export const Gratitude = ({
         </div>
 
         {!isEditing && (
-          <div className="flex flex-row space-x-3 items-center justify-end">
+          <div className="flex flex-row items-center justify-end space-x-3">
             <Button
               variant="secondary-outline"
               onClick={() => setIsEditing(true)}
@@ -154,7 +154,7 @@ export const Gratitude = ({
           </div>
         )}
       </div>
-      <div className="bg-gray-300 h-px w-full rounded-full" />
+      <div className="w-full h-px bg-gray-300 rounded-full" />
     </>
   );
 };

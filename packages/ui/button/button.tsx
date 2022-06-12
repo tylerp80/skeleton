@@ -73,7 +73,6 @@ export const Button = forwardRef<
   const {
     variant = "primary",
     size = "base",
-
     shallow,
     // attributes propagated from `HTMLAnchorProps` or `HTMLButtonProps`
     ...passThroughProps
@@ -142,7 +141,7 @@ export const Button = forwardRef<
     },
     <>
       <div className={classNames(loading ? "absolute" : "hidden")}>
-        <SvgSpinner className="h-4 w-4 animate-spin" />
+        <SvgSpinner className="w-4 h-4 animate-spin" />
       </div>
       <span
         className={classNames(
