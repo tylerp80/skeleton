@@ -75,7 +75,7 @@ export const Gratitude = ({
             {new Date(createdAt).toDateString()}
           </p>
           <p className="pb-2 text-lg font-medium text-gray-500">
-            I am grateful for 2:
+            I am grateful for:
           </p>
           {isEditing ? (
             <Formik
