@@ -11,6 +11,9 @@ type GratitudeProps = {
   id: string;
   description: string;
   createdAt: Date;
+  
+  
+  // i deleted something from here
 };
 
 export const Gratitude = ({
@@ -19,6 +22,7 @@ export const Gratitude = ({
   id,
   description,
   createdAt,
+  // i deleted something from here
 }: GratitudeProps) => {
   const utils = trpc.useContext();
 
@@ -45,6 +49,7 @@ export const Gratitude = ({
     },
     async onError(err) {},
   });
+
   const deleteGratitude = trpc.useMutation("gratitude.delete", {
     async onSuccess() {
       utils.setInfiniteQueryData(["gratitude.list", {}], (data) => {
@@ -65,7 +70,9 @@ export const Gratitude = ({
     },
     async onError(err) {},
   });
-  
+
+  // i deleted something from here
+
   return (
     <>
       <div className="flex flex-row py-3 space-x-3 rounded-md">
@@ -100,6 +107,7 @@ export const Gratitude = ({
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
+                // i deleted something from here maybe
               }) => (
                 <form onSubmit={handleSubmit}>
                   <textarea
@@ -143,14 +151,16 @@ export const Gratitude = ({
               Edit
             </Button>
             <Button
-              variant="secondary-outline"
+              variant="secondary-outline" 
               onClick={async () => {
                 await deleteGratitude.mutate({ id });
-              }}
+
+              }}// i deleted something from here
             >
               Delete
             </Button>
             <input type="checkbox" name="select"/>
+            // i deleted something from here
           </div>
           </form>
         )}

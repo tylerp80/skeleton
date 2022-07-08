@@ -85,16 +85,7 @@ export const gratitudeRouter = createRouter()
       });
     },
   })
-  .mutation("deleteMany", {
-    input: inputSchemaGratitudeDelete,
-    async resolve({ ctx, input }) {
-      return await ctx.prisma.$transaction([
-        ctx.prisma.gratitude.delete({ where: {id: input.id}}),
-        ctx.prisma.gratitude.delete({ where: {id: input.id}}),
-        ctx.prisma.gratitude.delete({ where: {id: input.id}})
-        ])
-      }
-    })
+ 
   
  //  return await ctx.prisma.$transaction([
     //     ctx.prisma.gratitude.create({ data: {description: input.description}}),
@@ -105,7 +96,7 @@ export const gratitudeRouter = createRouter()
   // }
   
   // * Delete a few Gratitudes
-  //    * const { count } = await prisma.gratitude.deleteMany({
+   // const { count } = await prisma.gratitude.deleteMany({
   //    *   where: {
   //    *     // ... provide filter here
   //    *   }
