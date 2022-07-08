@@ -1,10 +1,10 @@
-import { Gratitude } from "../components/Gratitude";
-import { trpc } from "../utils/trpc";
-import { NextPageWithLayout } from "./_app";
 import { inputSchemaGratitudeCreate } from "@skeleton/api/schemaValidation";
 import { zodSchemaToFormikValidate } from "@skeleton/lib";
 import { Button } from "@skeleton/ui";
 import { Formik } from "formik";
+import { Gratitude } from "../components/Gratitude";
+import { trpc } from "../utils/trpc";
+import { NextPageWithLayout } from "./_app";
 
 const IndexPage: NextPageWithLayout = () => {
   const utils = trpc.useContext();
@@ -25,11 +25,34 @@ const IndexPage: NextPageWithLayout = () => {
             pageParams: [],
           };
         }
+  
 
         return {
           ...data,
           pages: data.pages.map((page, index) =>
             index === 0 ? { ...page, data: [gratitude, ...page.data] } : page
+          ),
+        };
+      });
+    },
+    async onError(err) {},
+  });
+
+  const deleteGratitudes = trpc.useMutation("gratitude.deleteMany", {
+    async onSuccess(gratitude) {
+      utils.setInfiniteQueryData(["gratitude.list", {}], (data) => {
+        if (!data) {
+          return {
+            pages: [],
+            pageParams: [],
+          };
+        }
+  
+
+        return {
+          ...data,
+          pages: data.pages.map((page, index) =>
+            index === 0 ? { ...page, data: [...gratitude, ...page.data] } : page
           ),
         };
       });
@@ -61,7 +84,8 @@ const IndexPage: NextPageWithLayout = () => {
             isSubmitting,
           }) => (
             <form onSubmit={handleSubmit}>
-              <p className="pb-3 text-gray-500">Create a gratitude entry:</p>
+              <p className="pb-3 text-gray-500">Create a gratitude entry:
+              </p>
               <textarea
                 className="flex flex-row w-full min-h-[100px]"
                 name="description"
@@ -83,9 +107,14 @@ const IndexPage: NextPageWithLayout = () => {
           )}
         </Formik>
       </div>
-
+      <div className="flex flex-row items-center justify-end space-x-3">
+      <Button
+            >
+              Delete Selected
+            </Button>
+            </div>
+            
       <div className="bg-gray-300 h-px w-full rounded-full mt-6 mb-3" />
-
       <div className="flex flex-col space-y-3">
         {!isLoading &&
           data &&
@@ -101,12 +130,12 @@ const IndexPage: NextPageWithLayout = () => {
                     id={gratitude.id}
                     description={gratitude.description}
                     createdAt={gratitude.createdAt}
+
                   />
                 )
             )
           )}
       </div>
-
       <div className="flex flex-row items-center justify-center pt-6">
         {hasNextPage && (
           <Button onClick={() => fetchNextPage()}>Load more</Button>

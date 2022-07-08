@@ -8,7 +8,7 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>Skeleton</title>
+        <title>I Hate Errors</title>
       </Head>
 
       <main className="p-6">{children}</main>

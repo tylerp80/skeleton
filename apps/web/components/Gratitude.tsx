@@ -1,9 +1,9 @@
-import { trpc } from "../utils/trpc";
 import { inputSchemaGratitudeCreate } from "@skeleton/api/schemaValidation";
 import { zodSchemaToFormikValidate } from "@skeleton/lib";
 import { Button } from "@skeleton/ui";
 import { Formik } from "formik";
 import { useState } from "react";
+import { trpc } from "../utils/trpc";
 
 type GratitudeProps = {
   page: number;
@@ -45,7 +45,6 @@ export const Gratitude = ({
     },
     async onError(err) {},
   });
-
   const deleteGratitude = trpc.useMutation("gratitude.delete", {
     async onSuccess() {
       utils.setInfiniteQueryData(["gratitude.list", {}], (data) => {
@@ -66,7 +65,7 @@ export const Gratitude = ({
     },
     async onError(err) {},
   });
-
+  
   return (
     <>
       <div className="flex flex-row py-3 space-x-3 rounded-md">
@@ -134,8 +133,8 @@ export const Gratitude = ({
             <p className="text-black">{description}</p>
           )}
         </div>
-
         {!isEditing && (
+          <form id="test" method="POST">
           <div className="flex flex-row items-center justify-end space-x-3">
             <Button
               variant="secondary-outline"
@@ -151,10 +150,13 @@ export const Gratitude = ({
             >
               Delete
             </Button>
+            <input type="checkbox" name="select"/>
           </div>
+          </form>
         )}
       </div>
       <div className="w-full h-px bg-gray-300 rounded-full" />
     </>
+    
   );
 };
