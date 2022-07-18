@@ -1,5 +1,3 @@
-import { Layout } from "../components/Layout";
-import { SSRContext } from "../utils/trpc";
 import { AppRouter } from "@skeleton/api/routers/_app";
 import "@skeleton/ui/styles/globals.css";
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
@@ -12,6 +10,7 @@ import { AppProps } from "next/app";
 import { AppType } from "next/dist/shared/lib/utils";
 import { ReactElement, ReactNode } from "react";
 import superjson from "superjson";
+import { Layout } from "../components/Layout";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,6 +19,7 @@ export type NextPageWithLayout = NextPage & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+
 
 const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);

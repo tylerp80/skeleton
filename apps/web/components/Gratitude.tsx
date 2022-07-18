@@ -11,10 +11,10 @@ type GratitudeProps = {
   id: string;
   description: string;
   createdAt: Date;
-  
-  
-  // i deleted something from here
+  checkedGratitudes: string[];
+  setCheckGratitudes: any; //why not set it for boolean?
 };
+
 
 export const Gratitude = ({
   page,
@@ -22,10 +22,12 @@ export const Gratitude = ({
   id,
   description,
   createdAt,
-  // i deleted something from here
-}: GratitudeProps) => {
-  const utils = trpc.useContext();
+  checkedGratitudes,
+  setCheckGratitudes,
 
+}: GratitudeProps) => {
+
+  const utils = trpc.useContext();
   const [isEditing, setIsEditing] = useState(false);
 
   const updateGratitude = trpc.useMutation("gratitude.update", {
@@ -47,7 +49,7 @@ export const Gratitude = ({
       });
       setIsEditing(false);
     },
-    async onError(err) {},
+    async onError(err) { },
   });
 
   const deleteGratitude = trpc.useMutation("gratitude.delete", {
@@ -68,10 +70,8 @@ export const Gratitude = ({
         };
       });
     },
-    async onError(err) {},
+    async onError(err) { },
   });
-
-  // i deleted something from here
 
   return (
     <>
@@ -107,7 +107,7 @@ export const Gratitude = ({
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
-                // i deleted something from here maybe
+
               }) => (
                 <form onSubmit={handleSubmit}>
                   <textarea
@@ -142,7 +142,7 @@ export const Gratitude = ({
           )}
         </div>
         {!isEditing && (
-          <form id="test" method="POST">
+
           <div className="flex flex-row items-center justify-end space-x-3">
             <Button
               variant="secondary-outline"
@@ -150,23 +150,25 @@ export const Gratitude = ({
             >
               Edit
             </Button>
+
             <Button
-              variant="secondary-outline" 
+              variant="secondary-outline"
               onClick={async () => {
                 await deleteGratitude.mutate({ id });
 
-              }}// i deleted something from here
+              }}
             >
               Delete
             </Button>
-            <input type="checkbox" name="select"/>
-            // i deleted something from here
+            <input type="checkbox" id="checkboxAll" />
+            {/* value={checkedGratitudes} onChange={(e) => setCheckGratitudes(e.target.value)} */}
+
+            <div>
+            </div>
           </div>
-          </form>
         )}
       </div>
       <div className="w-full h-px bg-gray-300 rounded-full" />
     </>
-    
   );
 };

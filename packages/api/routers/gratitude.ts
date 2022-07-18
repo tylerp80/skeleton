@@ -1,9 +1,9 @@
 import { createRouter } from "../createRouter";
 import {
-  inputSchemaGratitudeCreate,
-  inputSchemaGratitudeDelete,
-  inputSchemaGratitudeList,
-  inputSchemaGratitudeUpdate
+    inputSchemaGratitudeCreate,
+    inputSchemaGratitudeDelete,
+    inputSchemaGratitudeList,
+    inputSchemaGratitudeUpdate
 } from "../schemaValidation";
 
 export const gratitudeRouter = createRouter()
